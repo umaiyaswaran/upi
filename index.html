@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLOBALUPI - Multi-Currency Payment Platform</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="nav-brand">
+                <h1>🌐 GLOBALUPI</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#" onclick="showPage('login')" class="nav-link">Login</a></li>
+                <li><a href="#" onclick="showPage('dashboard')" class="nav-link">Dashboard</a></li>
+                <li><a href="#" onclick="showPage('send-money')" class="nav-link">Send Money</a></li>
+                <li><a href="#" onclick="showPage('converter')" class="nav-link">Converter</a></li>
+                <li><a href="#" onclick="showPage('investments')" class="nav-link">Investments</a></li>
+                <li><a href="#" onclick="showPage('transactions')" class="nav-link">Transactions</a></li>
+                <li><a href="#" onclick="logout()" class="nav-link logout-btn">Logout</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Login/Signup Page -->
+            <section id="login" class="page active">
+                <div class="auth-container">
+                    <div class="auth-card">
+                        <h2>Welcome to GLOBALUPI</h2>
+                        <p class="subtitle">Multi-Currency Payment Platform</p>
+                        
+                        <div class="auth-tabs">
+                            <button class="tab-btn active" onclick="switchAuthTab('login-form')">Login</button>
+                            <button class="tab-btn" onclick="switchAuthTab('signup-form')">Sign Up</button>
+                        </div>
+
+                        <!-- Login Form -->
+                        <form id="login-form" class="auth-form active" onsubmit="handleLogin(event)">
+                            <div class="form-group">
+                                <label for="login-email">Email:</label>
+                                <input type="email" id="login-email" placeholder="your@email.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="login-password">Password:</label>
+                                <input type="password" id="login-password" placeholder="Enter password" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </form>
+
+                        <!-- Signup Form -->
+                        <form id="signup-form" class="auth-form" onsubmit="handleSignup(event)">
+                            <div class="form-group">
+                                <label for="signup-name">Full Name:</label>
+                                <input type="text" id="signup-name" placeholder="John Doe" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="signup-email">Email:</label>
+                                <input type="email" id="signup-email" placeholder="your@email.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="signup-phone">Phone:</label>
+                                <input type="tel" id="signup-phone" placeholder="+91 98765 43210" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="signup-bank-name">Bank Name:</label>
+                                <input type="text" id="signup-bank-name" placeholder="HDFC Bank" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="signup-account-number">Account Number:</label>
+                                <input type="text" id="signup-account-number" placeholder="1234567890123456" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="signup-password">Password:</label>
+                                <input type="password" id="signup-password" placeholder="Create password" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Create Account</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dashboard Page -->
+            <section id="dashboard" class="page">
+                <div class="dashboard-container">
+                    <h2>Dashboard</h2>
+                    
+                    <!-- User Info Card -->
+                    <div class="user-info">
+                        <h3>Welcome, <span id="user-name">Guest</span>!</h3>
+                        <p id="user-email">Email: guest@example.com</p>
+                    </div>
+
+                    <!-- Balance Cards -->
+                    <div class="balance-grid">
+                        <div class="balance-card">
+                            <div class="balance-header">
+                                <h4>Indian Rupees</h4>
+                                <span class="currency-code">INR</span>
+                            </div>
+                            <div class="balance-amount">₹<span id="balance-inr">25,500.00</span></div>
+                            <p class="balance-label">Available Balance</p>
+                        </div>
+
+                        <div class="balance-card">
+                            <div class="balance-header">
+                                <h4>US Dollars</h4>
+                                <span class="currency-code">USD</span>
+                            </div>
+                            <div class="balance-amount">$<span id="balance-usd">500.00</span></div>
+                            <p class="balance-label">Available Balance</p>
+                        </div>
+
+                        <div class="balance-card">
+                            <div class="balance-header">
+                                <h4>Euros</h4>
+                                <span class="currency-code">EUR</span>
+                            </div>
+                            <div class="balance-amount">€<span id="balance-eur">300.00</span></div>
+                            <p class="balance-label">Available Balance</p>
+                        </div>
+                    </div>
+
+                    <!-- Quick Stats -->
+                    <div class="stats-section">
+                        <h3>Quick Stats</h3>
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-value">12</div>
+                                <div class="stat-label">Transactions This Month</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value">8</div>
+                                <div class="stat-label">Sent Payments</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value">4</div>
+                                <div class="stat-label">Received Payments</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value">$2,450</div>
+                                <div class="stat-label">Total Invested</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Send Money Page -->
+            <section id="send-money" class="page">
+                <div class="send-money-container">
+                    <h2>Send Money</h2>
+                    
+                    <div class="send-money-card">
+                        <form onsubmit="handleSendMoney(event)">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="recipient-name">Recipient Name:</label>
+                                    <input type="text" id="recipient-name" placeholder="John Doe" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="recipient-email">Recipient Email/Phone:</label>
+                                    <input type="text" id="recipient-email" placeholder="john@example.com or 98765 43210" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="recipient-bank-name">Recipient Bank Name:</label>
+                                    <input type="text" id="recipient-bank-name" placeholder="HDFC Bank" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="recipient-account-number">Recipient Account Number:</label>
+                                    <input type="text" id="recipient-account-number" placeholder="1234567890123456" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="send-amount">Amount:</label>
+                                    <input type="number" id="send-amount" placeholder="0.00" step="0.01" min="0" required onchange="updateConversion()">
+                                </div>
+                                <div class="form-group">
+                                    <label for="send-currency">Currency:</label>
+                                    <select id="send-currency" required onchange="updateConversion()">
+                                        <option value="INR">INR (₹)</option>
+                                        <option value="USD">USD ($)</option>
+                                        <option value="EUR">EUR (€)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Conversion Display -->
+                            <div class="conversion-display" id="conversion-display" style="display: none;">
+                                <h4>Real-Time Conversion</h4>
+                                <div class="conversion-info">
+                                    <div class="conversion-from">
+                                        <span id="conversion-from-amount">0</span>
+                                        <span id="conversion-from-currency">INR</span>
+                                    </div>
+                                    <div class="conversion-arrow">→</div>
+                                    <div class="conversion-to">
+                                        <span id="conversion-to-amount">0</span>
+                                        <span id="conversion-to-currency">USD</span>
+                                    </div>
+                                </div>
+                                <p class="exchange-rate">Exchange Rate: <span id="exchange-rate">1 INR = 0.012 USD</span></p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="send-message">Message (Optional):</label>
+                                <textarea id="send-message" placeholder="Add a message for the recipient" rows="3"></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-lg">Send Money</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Currency Converter Page -->
+            <section id="converter" class="page">
+                <div class="converter-container">
+                    <h2>Currency Converter</h2>
+                    
+                    <div class="converter-card">
+                        <div class="converter-grid">
+                            <div class="converter-column">
+                                <h3>From</h3>
+                                <div class="form-group">
+                                    <input type="number" id="converter-from-amount" placeholder="0.00" step="0.01" min="0" value="1" oninput="convertCurrency()">
+                                </div>
+                                <div class="form-group">
+                                    <select id="converter-from-currency" onchange="convertCurrency()">
+                                        <option value="INR">INR (₹)</option>
+                                        <option value="USD">USD ($)</option>
+                                        <option value="EUR">EUR (€)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="converter-middle">
+                                <button class="btn btn-icon" onclick="swapCurrencies()" title="Swap currencies">⇄</button>
+                            </div>
+
+                            <div class="converter-column">
+                                <h3>To</h3>
+                                <div class="form-group">
+                                    <input type="text" id="converter-to-amount" placeholder="0.00" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <select id="converter-to-currency" onchange="convertCurrency()">
+                                        <option value="USD">USD ($)</option>
+                                        <option value="INR">INR (₹)</option>
+                                        <option value="EUR">EUR (€)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Exchange Rates Table -->
+                        <div class="rates-section">
+                            <h3>Current Exchange Rates</h3>
+                            <table class="rates-table">
+                                <thead>
+                                    <tr>
+                                        <th>Currency Pair</th>
+                                        <th>Rate</th>
+                                        <th>Change</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>INR → USD</td>
+                                        <td>1 INR = $0.012</td>
+                                        <td class="positive">+0.5%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>INR → EUR</td>
+                                        <td>1 INR = €0.011</td>
+                                        <td class="positive">+0.3%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>USD → INR</td>
+                                        <td>1 USD = ₹83.50</td>
+                                        <td class="negative">-0.5%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>USD → EUR</td>
+                                        <td>1 USD = €0.92</td>
+                                        <td class="negative">-0.2%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>EUR → INR</td>
+                                        <td>1 EUR = ₹91.05</td>
+                                        <td class="positive">+0.8%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>EUR → USD</td>
+                                        <td>1 EUR = $1.09</td>
+                                        <td class="positive">+0.2%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Investments Page -->
+            <section id="investments" class="page">
+                <div class="investments-container">
+                    <h2>Investments</h2>
+                    
+                    <div class="portfolio-overview">
+                        <div class="portfolio-card">
+                            <h3>Portfolio Value</h3>
+                            <div class="portfolio-value">$2,450.00</div>
+                            <p class="portfolio-change positive">↑ +$125.50 (+5.4%)</p>
+                        </div>
+                    </div>
+
+                    <!-- Stocks Section -->
+                    <div class="investment-section">
+                        <h3>Stocks</h3>
+                        <div class="investment-grid">
+                            <div class="investment-card">
+                                <div class="investment-header">
+                                    <h4>Apple Inc.</h4>
+                                    <span class="ticker">AAPL</span>
+                                </div>
+                                <div class="investment-details">
+                                    <p>Current Price: <strong>$178.50</strong></p>
+                                    <p>Your Holdings: <strong>5 shares</strong></p>
+                                    <p>Value: <strong>$892.50</strong></p>
+                                </div>
+                                <p class="performance positive">↑ +3.2%</p>
+                            </div>
+
+                            <div class="investment-card">
+                                <div class="investment-header">
+                                    <h4>Microsoft Corp.</h4>
+                                    <span class="ticker">MSFT</span>
+                                </div>
+                                <div class="investment-details">
+                                    <p>Current Price: <strong>$380.00</strong></p>
+                                    <p>Your Holdings: <strong>2 shares</strong></p>
+                                    <p>Value: <strong>$760.00</strong></p>
+                                </div>
+                                <p class="performance positive">↑ +2.1%</p>
+                            </div>
+
+                            <div class="investment-card">
+                                <div class="investment-header">
+                                    <h4>Tesla Inc.</h4>
+                                    <span class="ticker">TSLA</span>
+                                </div>
+                                <div class="investment-details">
+                                    <p>Current Price: <strong>$250.00</strong></p>
+                                    <p>Your Holdings: <strong>3 shares</strong></p>
+                                    <p>Value: <strong>$750.00</strong></p>
+                                </div>
+                                <p class="performance negative">↓ -1.5%</p>
+                            </div>
+
+                            <div class="investment-card">
+                                <div class="investment-header">
+                                    <h4>Google LLC</h4>
+                                    <span class="ticker">GOOGL</span>
+                                </div>
+                                <div class="investment-details">
+                                    <p>Current Price: <strong>$140.25</strong></p>
+                                    <p>Your Holdings: <strong>4 shares</strong></p>
+                                    <p>Value: <strong>$561.00</strong></p>
+                                </div>
+                                <p class="performance positive">↑ +1.8%</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cryptocurrency Section -->
+                    <div class="investment-section">
+                        <h3>Cryptocurrency</h3>
+                        <div class="investment-grid">
+                            <div class="investment-card">
+                                <div class="investment-header">
+                                    <h4>Bitcoin</h4>
+                                    <span class="ticker">BTC</span>
+                                </div>
+                                <div class="investment-details">
+                                    <p>Current Price: <strong>$42,500.00</strong></p>
+                                    <p>Your Holdings: <strong>0.02 BTC</strong></p>
+                                    <p>Value: <strong>$850.00</strong></p>
+                                </div>
+                                <p class="performance positive">↑ +12.3%</p>
+                            </div>
+
+                            <div class="investment-card">
+                                <div class="investment-header">
+                                    <h4>Ethereum</h4>
+                                    <span class="ticker">ETH</span>
+                                </div>
+                                <div class="investment-details">
+                                    <p>Current Price: <strong>$2,250.00</strong></p>
+                                    <p>Your Holdings: <strong>0.3 ETH</strong></p>
+                                    <p>Value: <strong>$675.00</strong></p>
+                                </div>
+                                <p class="performance positive">↑ +8.5%</p>
+                            </div>
+
+                            <div class="investment-card">
+                                <div class="investment-header">
+                                    <h4>Ripple</h4>
+                                    <span class="ticker">XRP</span>
+                                </div>
+                                <div class="investment-details">
+                                    <p>Current Price: <strong>$2.45</strong></p>
+                                    <p>Your Holdings: <strong>200 XRP</strong></p>
+                                    <p>Value: <strong>$490.00</strong></p>
+                                </div>
+                                <p class="performance negative">↓ -3.2%</p>
+                            </div>
+
+                            <div class="investment-card">
+                                <div class="investment-header">
+                                    <h4>Litecoin</h4>
+                                    <span class="ticker">LTC</span>
+                                </div>
+                                <div class="investment-details">
+                                    <p>Current Price: <strong>$185.00</strong></p>
+                                    <p>Your Holdings: <strong>1 LTC</strong></p>
+                                    <p>Value: <strong>$185.00</strong></p>
+                                </div>
+                                <p class="performance positive">↑ +5.1%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Transaction History Page -->
+            <section id="transactions" class="page">
+                <div class="transactions-container">
+                    <h2>Transaction History</h2>
+                    
+                    <!-- Filter Section -->
+                    <div class="filter-section">
+                        <div class="filter-group">
+                            <label>Filter by Type:</label>
+                            <select id="transaction-filter" onchange="filterTransactions()">
+                                <option value="all">All Transactions</option>
+                                <option value="sent">Sent</option>
+                                <option value="received">Received</option>
+                                <option value="conversion">Currency Conversion</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Transactions Table -->
+                    <div class="transactions-table-container">
+                        <table class="transactions-table">
+                            <thead>
+                                <tr>
+                                    <th>Date & Time</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transactions-list">
+                                <!-- Will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Transaction Summary -->
+                    <div class="transaction-summary">
+                        <div class="summary-card">
+                            <h4>Total Sent</h4>
+                            <p class="summary-amount">$4,250.50</p>
+                        </div>
+                        <div class="summary-card">
+                            <h4>Total Received</h4>
+                            <p class="summary-amount">$2,100.00</p>
+                        </div>
+                        <div class="summary-card">
+                            <h4>Total Conversions</h4>
+                            <p class="summary-amount">$850.00</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2025 GLOBALUPI - Multi-Currency UPI Payment Platform. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
